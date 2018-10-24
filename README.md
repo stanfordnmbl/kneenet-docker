@@ -16,3 +16,7 @@ Run
     sudo bash run.sh
     
 Results will be available in `output`
+
+## Building docker
+
+    sudo docker build . -t stanford-nmbl/kneenet
