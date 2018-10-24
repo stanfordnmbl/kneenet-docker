@@ -1,0 +1,11 @@
+if [ ! -f models/KneeNet.0 ]; then
+    mkdir -p models
+    wget -O models/KneeNet.0 https://s3-eu-west-1.amazonaws.com/kidzinski/models/KneeNet/KneeNet.0
+fi
+sudo nvidia-docker run \
+    -v $PWD/input:/workspace/input \
+    -v $PWD/output:/workspace/output \
+    -v $PWD/scripts:/workspace/scripts \
+    -v $PWD/models:/workspace/models \
+    -it stanford-nmbl/kneenet:latest \
+    python scripts/predict.py && printf "\n-- RESULTS (in output/prediction.csv) --\n" && cat output/predictions.csv | column -t -s,
