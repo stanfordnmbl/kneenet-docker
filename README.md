@@ -2,7 +2,7 @@
 
 ## Requirements
 
-nvidia-docker
+[docker](https://www.docker.com/) or [nvidia-docker](https://github.com/NVIDIA/nvidia-docker)
 
 ## Installation
 
