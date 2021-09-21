@@ -1,7 +1,7 @@
 if [ ! -f models/KneeNet.0 ]; then
     mkdir -p models
     mkdir -p output
-    curl https://s3-eu-west-1.amazonaws.com/kidzinski/models/KneeNet/KneeNet.0 -O models/KneeNet.0 
+    curl https://s3-eu-west-1.amazonaws.com/kidzinski/models/KneeNet/KneeNet.0 -o models/KneeNet.0 
 fi
 docker run \
     -v ${PWD}/input:/workspace/input \

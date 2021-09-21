@@ -27,14 +27,24 @@ def default_preprocessing(image,
                           output_width = 299, 
                           output_height = 299):
 
-    # Trim equal rows from top and bottom to get a square image
     r, c = image.shape
-    image_hw_ratio = r/c
-    r_to_keep = c * min_hw_ratio
-    r_to_delete = r - r_to_keep
-    remove_from_top = int(math.ceil(r_to_delete/2))
-    remove_from_bottom = int(math.floor(r_to_delete/2))
-    image_top_bottom_trimmed = image[remove_from_top:(r-remove_from_bottom),:]
+    if c>r:
+        # Trim equal columns from left and right to get a square image
+        image_hw_ratio = c/r
+        c_to_keep = r * min_hw_ratio
+        c_to_delete = c - c_to_keep
+        remove_from_top = int(math.ceil(c_to_delete/2))
+        remove_from_bottom = int(math.floor(c_to_delete/2))
+        image_top_bottom_trimmed = image[:,remove_from_top:(r-remove_from_bottom)]
+        
+    if r>c:
+        # Trim equal rows from top and bottom to get a square image
+        image_hw_ratio = r/c
+        r_to_keep = c * min_hw_ratio
+        r_to_delete = r - r_to_keep
+        remove_from_top = int(math.ceil(r_to_delete/2))
+        remove_from_bottom = int(math.floor(r_to_delete/2))
+        image_top_bottom_trimmed = image[remove_from_top:(r-remove_from_bottom),:]
 
     # resample to get the desired image size
     image_resampled = cv2.resize(image_top_bottom_trimmed, dsize=(output_width, output_height), interpolation=cv2.INTER_CUBIC)
