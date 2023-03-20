@@ -37,7 +37,7 @@ def default_preprocessing(image,
         remove_from_bottom = int(math.floor(c_to_delete/2))
         image_top_bottom_trimmed = image[:,remove_from_top:(r-remove_from_bottom)]
         
-    if r>c:
+    else:
         # Trim equal rows from top and bottom to get a square image
         image_hw_ratio = r/c
         r_to_keep = c * min_hw_ratio
